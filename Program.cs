@@ -3,6 +3,7 @@ using Discord.WebSocket;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using GentelmanParserDiscordBot;
 
 namespace GentelmanParserDiscordBot
 {
@@ -61,16 +62,35 @@ namespace GentelmanParserDiscordBot
             command = message.Content.Substring(1, lengthOfCommand - 1).ToLower();
 
             //Commands begin here
-            if (command.Equals("hello"))
+            switch (command)
             {
-                message.Channel.SendMessageAsync($@"Hello {message.Author.Mention}");
-            }
-            else if (command.Equals("age"))
-            {
-                message.Channel.SendMessageAsync($@"Your account was created at {message.Author.CreatedAt.DateTime.Date}");
+                case "hello":
+                    message.Channel.SendMessageAsync($"Hello {message.Author.Mention}! How are you feel today?");
+                    break;
+
+                case "onator":
+                    message.Channel.SendMessageAsync("Eeeee! Utopce!");
+                    break;
+
+                case "postacie":
+                    message.Channel.SendMessageAsync(
+                        $"Your characters are: {message.Author.Id} {message.Author.Username} {message.Author.Status}");
+                    break;
+
+                default: // unvalid commands or dice
+                    if (DiceParser.IsADiceRoll(command))
+                    {
+                        message.Channel.SendMessageAsync(DiceParser.Roll(command));
+                        //message.Channel.SendMessageAsync($"It is a dice command");
+                        break;
+                    }
+
+                    message.Channel.SendMessageAsync($"*{command}* was a not valid command My Lord");
+                    break;
             }
 
             return Task.CompletedTask;
         }
+
     }
 }
