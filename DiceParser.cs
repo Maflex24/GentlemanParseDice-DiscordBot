@@ -24,6 +24,21 @@ namespace GentelmanParserDiscordBot
             RollData rollData = new RollData();
             int nextIndexToCheck = 0;
 
+            List<int> rollDigits = new List<int>();
+            for (int i = 0; i < command.Length; i++)
+            {
+                if (Regex.IsMatch(command[i].ToString(), @"\d"))
+                {
+                    rollDigits.Add(int.Parse(command[i].ToString()));
+                    nextIndexToCheck = i + 1;
+                    continue;
+                }
+
+                nextIndexToCheck = i + 1;
+                break;
+            }
+
+            rollData.HowManyRolls = int.Parse(String.Join("", rollDigits.ToArray()));
 
             List<int> diceDigits = new List<int>(); // todo try only regex solution, without loops
             for (int i = nextIndexToCheck; i < command.Length; i++)

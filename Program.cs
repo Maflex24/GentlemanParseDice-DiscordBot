@@ -80,7 +80,7 @@ namespace GentelmanParserDiscordBot
                 default: // unvalid commands or dice
                     if (DiceParser.IsADiceRoll(command))
                     {
-                        message.Channel.SendMessageAsync(DiceParser.Roll(command));
+                        message.Channel.SendMessageAsync(message.Author.Mention + ": " + DiceParser.Roll(command));
                         //message.Channel.SendMessageAsync($"It is a dice command");
                         break;
                     }
