@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GentelmanParserDiscordBot
@@ -16,64 +17,55 @@ namespace GentelmanParserDiscordBot
             Random dice = new Random();
             List<int> rolls = new List<int>();
 
+            if (rollData.HowManyRolls > 30)
+                return "Eeeh, really?";
+
             for (int i = 0; i < rollData.HowManyRolls; i++)
             {
+                Thread.Sleep(5);
                 rolls.Add(dice.Next(1, rollData.DiceType));
             }
 
-            return $"{rollData.HowManyRolls}k{rollData.HowManyRolls} rolls: {string.Join(", ", rolls)}, together: {rolls.Sum()}";
+
+            return $"**{rolls.Sum()}** \n```[{command}] | Rolls: [{string.Join(", ", rolls)}] \nAverage: {rolls.Average()}```";
         }
 
         private static RollData GetRollData(string command)
         {
             RollData rollData = new RollData();
-            int nextIndexToCheck = 0;
+            string isDigid = @"\d";
+            string isDigidOrMinusDigid = @"\d|-\d";
 
-            List<int> rollDigits = new List<int>();
+            // Rolls Qty
+            var rollsQtyValues = command.TakeWhile(c => Regex.IsMatch(c.ToString(), isDigid)).ToArray();
+            if (rollsQtyValues.Length < 1)
+                rollData.HowManyRolls = 1;
+            else
+                rollData.HowManyRolls = int.Parse(rollsQtyValues);
 
-            for (int i = 0; i < command.Length; i++)
+            // DiceType
+            int dkIndex = command.IndexOfAny(new char[] { 'd', 'k' });
+            var diceTypeValues = command.Substring(dkIndex + 1).TakeWhile(c => Regex.IsMatch(c.ToString(), isDigid)).ToArray();
+            rollData.DiceType = int.Parse(diceTypeValues.ToArray());
+
+            // Bonuses
+            int bonusesStatedIndex = command.IndexOfAny(new char[] { '+', '-' });
+
+            if (bonusesStatedIndex < 0)
+                rollData.bonuses = 0;
+            else
             {
-                if (!Regex.IsMatch(command[0].ToString(), @"\d"))
+                var bonusValues = Regex.Matches(command.Substring(bonusesStatedIndex), isDigidOrMinusDigid);
+
+                foreach (Match element in bonusValues)
                 {
-                    rollDigits.Add(1);
-                    nextIndexToCheck++;
-                    break;
+                    rollData.bonuses += int.Parse(element.Value);
                 }
-
-                if (Regex.IsMatch(command[i].ToString(), @"\d"))
-                {
-                    rollDigits.Add(int.Parse(command[i].ToString()));
-                    nextIndexToCheck = i + 1;
-                    continue;
-                }
-
-                nextIndexToCheck = i + 1;
-                break;
             }
-
-            rollData.HowManyRolls = int.Parse(String.Join("", rollDigits.ToArray()));
-
-            List<int> diceDigits = new List<int>(); // todo try only regex solution, without loops
-            for (int i = nextIndexToCheck; i < command.Length; i++)
-            {
-                if (Regex.IsMatch(command[i].ToString(), @"\d"))
-                    diceDigits.Add(int.Parse(command[i].ToString()));
-                else
-                    break;
-
-                nextIndexToCheck = i + 1;
-            }
-
-            string rollsDiceString = String.Join("", diceDigits.ToArray()); // todo It's how to convert list to string!
-            rollData.DiceType = int.Parse(rollsDiceString);
 
             return rollData;
         }
 
-        //private int GetRollsQtyData(string command)
-        //{
-
-        //}
 
         public static bool IsADiceRoll(string command)
         {
