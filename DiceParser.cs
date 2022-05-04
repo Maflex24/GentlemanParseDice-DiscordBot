@@ -12,11 +12,16 @@ namespace GentelmanParserDiscordBot
         public static string Roll(string command)
         {
             RollData rollData = DiceParser.GetRollData(command);
-            //int howManyRolls = RollData[0];
-            //int diceType = RollData[1];
-            //int bonuses = RollData[2];
 
-            return $"{rollData.HowManyRolls} rzutów kostką {rollData.DiceType}";
+            Random dice = new Random();
+            List<int> rolls = new List<int>();
+
+            for (int i = 0; i < rollData.HowManyRolls; i++)
+            {
+                rolls.Add(dice.Next(1, rollData.DiceType));
+            }
+
+            return $"{rollData.HowManyRolls}k{rollData.HowManyRolls} rolls: {string.Join(", ", rolls)}, together: {rolls.Sum()}";
         }
 
         private static RollData GetRollData(string command)
@@ -25,8 +30,16 @@ namespace GentelmanParserDiscordBot
             int nextIndexToCheck = 0;
 
             List<int> rollDigits = new List<int>();
+
             for (int i = 0; i < command.Length; i++)
             {
+                if (!Regex.IsMatch(command[0].ToString(), @"\d"))
+                {
+                    rollDigits.Add(1);
+                    nextIndexToCheck++;
+                    break;
+                }
+
                 if (Regex.IsMatch(command[i].ToString(), @"\d"))
                 {
                     rollDigits.Add(int.Parse(command[i].ToString()));
