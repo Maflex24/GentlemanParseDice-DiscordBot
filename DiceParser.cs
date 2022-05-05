@@ -48,7 +48,7 @@ namespace GentelmanParserDiscordBot
             rollData.DiceType = int.Parse(diceTypeValues.ToArray());
 
             // Bonuses
-            int bonusesStatedIndex = command.IndexOfAny(new char[] { '+', '-' }); // TODO Program don't take second digid
+            int bonusesStatedIndex = command.IndexOfAny(new char[] { '+', '-' });
 
             if (bonusesStatedIndex < 0)
                 rollData.bonuses = 0;
@@ -71,7 +71,7 @@ namespace GentelmanParserDiscordBot
             if (command == null)
                 return false;
 
-            if (Regex.IsMatch(command[0].ToString(), @"\d|k|d"))
+            if (Regex.Matches(command, @"d\d+|k\d").Count > 0)
                 return true;
 
             return false;
