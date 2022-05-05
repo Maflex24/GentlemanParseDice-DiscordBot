@@ -22,19 +22,18 @@ namespace GentelmanParserDiscordBot
 
             for (int i = 0; i < rollData.HowManyRolls; i++)
             {
-                Thread.Sleep(5);
+                Thread.Sleep(2);
                 rolls.Add(dice.Next(1, rollData.DiceType));
             }
 
-
-            return $"**{rolls.Sum()}** \n```[{command}] | Rolls: [{string.Join(", ", rolls)}] \nAverage: {rolls.Average()}```";
+            return $"**{rolls.Sum() + rollData.bonuses}** \n```[{command}] | Rolls: [{string.Join(", ", rolls)}] [{rollData.bonuses}] \nAverage: {Math.Round(rolls.Average(), 2)}```";
         }
 
         private static RollData GetRollData(string command)
         {
             RollData rollData = new RollData();
             string isDigid = @"\d";
-            string isDigidOrMinusDigid = @"\d|-\d";
+            string isDigidOrMinusDigid = @"\d+|-\d+";
 
             // Rolls Qty
             var rollsQtyValues = command.TakeWhile(c => Regex.IsMatch(c.ToString(), isDigid)).ToArray();
@@ -49,7 +48,7 @@ namespace GentelmanParserDiscordBot
             rollData.DiceType = int.Parse(diceTypeValues.ToArray());
 
             // Bonuses
-            int bonusesStatedIndex = command.IndexOfAny(new char[] { '+', '-' });
+            int bonusesStatedIndex = command.IndexOfAny(new char[] { '+', '-' }); // TODO Program don't take second digid
 
             if (bonusesStatedIndex < 0)
                 rollData.bonuses = 0;
