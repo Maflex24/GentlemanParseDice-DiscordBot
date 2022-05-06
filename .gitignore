@@ -1,4 +1,6 @@
 token.txt
 bin/Debug
 .vs/
+obj/Debug/*
+
 
