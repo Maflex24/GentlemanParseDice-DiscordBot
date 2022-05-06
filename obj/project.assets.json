@@ -507,11 +507,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DEVs\\Projects\\GentelmanParserDiscordBot\\GentelmanParserDiscordBot.csproj",
+      "projectUniqueName": "D:\\DEVs\\Projects\\GentlemanParseDice-DiscordBot\\GentelmanParserDiscordBot.csproj",
       "projectName": "GentelmanParserDiscordBot",
-      "projectPath": "D:\\DEVs\\Projects\\GentelmanParserDiscordBot\\GentelmanParserDiscordBot.csproj",
+      "projectPath": "D:\\DEVs\\Projects\\GentlemanParseDice-DiscordBot\\GentelmanParserDiscordBot.csproj",
       "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-      "outputPath": "D:\\DEVs\\Projects\\GentelmanParserDiscordBot\\obj\\",
+      "outputPath": "D:\\DEVs\\Projects\\GentlemanParseDice-DiscordBot\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -16,17 +16,10 @@ namespace GentelmanParserDiscordBot
         public async Task MainAsync()
         {
             _client = new DiscordSocketClient();
-            _client.MessageReceived += CommandHandler;
+            _client.MessageReceived += CommandHandler.Handler;
             _client.Log += Log;
 
-            //  You can assign your bot token to a string, and pass that in to connect.
-            //  This is, however, insecure, particularly if you plan to have your code hosted in a public repository.
             var token = File.ReadAllText("../../../token.txt");
-
-            // Some alternative options would be to keep your token in an Environment Variable or a standalone file.
-            // var token = Environment.GetEnvironmentVariable("NameOfYourEnvironmentVariable");
-            // var token = File.ReadAllText("token.txt");
-            // var token = JsonConvert.DeserializeObject<AConfigurationClass>(File.ReadAllText("config.json")).Token;
 
             await _client.LoginAsync(TokenType.Bot, token);
             await _client.StartAsync();
@@ -40,57 +33,5 @@ namespace GentelmanParserDiscordBot
             Console.WriteLine(msg.ToString());
             return Task.CompletedTask;
         }
-
-        private Task CommandHandler(SocketMessage message)
-        {
-            //variables
-            string command = "";
-            int lengthOfCommand = -1;
-
-            //filtering messages begin here
-            if (!message.Content.StartsWith('!')) //This is your prefix
-                return Task.CompletedTask;
-
-            if (message.Author.IsBot) //This ignores all commands from bots
-                return Task.CompletedTask;
-
-            if (message.Content.Contains(' '))
-                lengthOfCommand = message.Content.IndexOf(' ');
-            else
-                lengthOfCommand = message.Content.Length;
-
-            command = message.Content.Substring(1, lengthOfCommand - 1).ToLower();
-
-            //Commands begin here
-            switch (command)
-            {
-                case "hello":
-                    message.Channel.SendMessageAsync($"Hello {message.Author.Mention}! How are you feel today?");
-                    break;
-
-                case "onator":
-                    message.Channel.SendMessageAsync("Eeeee! Utopce!");
-                    break;
-
-                case "postacie":
-                    message.Channel.SendMessageAsync(
-                        $"Your characters are: {message.Author.Id} {message.Author.Username} {message.Author.Status}");
-                    break;
-
-                default: // unvalid commands or dice
-                    if (DiceParser.IsADiceRoll(command))
-                    {
-                        message.Channel.SendMessageAsync(message.Author.Mention + ": " + DiceParser.Roll(command));
-                        //message.Channel.SendMessageAsync($"It is a dice command");
-                        break;
-                    }
-
-                    message.Channel.SendMessageAsync($"*{command}* was a not valid command My Lord");
-                    break;
-            }
-
-            return Task.CompletedTask;
-        }
-
     }
 }
