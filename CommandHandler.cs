@@ -30,17 +30,19 @@ namespace GentelmanParserDiscordBot
 
             command = message.Content.Substring(1, lengthOfCommand - 1).ToLower();
 
-            if (!Command.IsCommandValid(command))
-            {
-                message.Channel.SendMessageAsync(message.Author.Mention + " Your comment is not valid, Dear");
-                return Task.CompletedTask;
-            }
-
             if (DiceParser.IsADiceRoll(command))
             {
                 message.Channel.SendMessageAsync(message.Author.Mention + ": " + DiceParser.Roll(command));
                 return Task.CompletedTask;
             }
+
+            if (!Command.IsCommandValid(command))
+            {
+                message.Channel.SendMessageAsync(message.Author.Mention + " Your command is not valid, Dear");
+                return Task.CompletedTask;
+            }
+
+            Command.ExecuteCommand(command, message);
 
             return Task.CompletedTask;
         }
