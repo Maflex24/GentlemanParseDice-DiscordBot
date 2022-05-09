@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace GentelmanParserDiscordBot
 {
-    public class DataHandler
+    public interface IDataHandler
+    {
+        public string GiveSomeString();
+    }
+
+    public class DataHandler : IDataHandler
     {
         private static bool objectExist = false;
 
@@ -23,5 +28,7 @@ namespace GentelmanParserDiscordBot
 
             return null;
         }
+
+        public string GiveSomeString() => "utopce.exe";
     }
 }

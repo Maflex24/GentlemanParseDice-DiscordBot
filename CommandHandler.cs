@@ -10,10 +10,17 @@ namespace GentelmanParserDiscordBot
 {
     public class CommandHandler
     {
+        private readonly IDataHandler _dataHandler;
+
+        public CommandHandler(SocketMessage message, IDataHandler dataHandler)
+        {
+            _dataHandler = dataHandler;
+        }
+
         public static Task Handler(SocketMessage message)
         {
             //variables
-            string command = "";
+            string commandContent = "";
             int lengthOfCommand = -1;
 
             //filtering messages begin here
@@ -28,24 +35,26 @@ namespace GentelmanParserDiscordBot
             else
                 lengthOfCommand = message.Content.Length;
 
-            command = message.Content.Substring(1, lengthOfCommand - 1).ToLower();
+            Command command = new Command(message.Content.Substring(1, lengthOfCommand - 1).ToLower());
 
-            if (DiceParser.IsADiceRoll(command))
+            if (DiceParser.IsADiceRoll(command.Content))
             {
-                message.Channel.SendMessageAsync(message.Author.Mention + ": " + DiceParser.Roll(command));
+                message.Channel.SendMessageAsync(message.Author.Mention + ": " + DiceParser.Roll(command.Content));
                 return Task.CompletedTask;
             }
 
-            if (!Command.IsCommandValid(command))
+            if (!command.IsCommandValid())
             {
                 message.Channel.SendMessageAsync(message.Author.Mention + " Your command is not valid, Dear");
                 return Task.CompletedTask;
             }
 
-            Command.ExecuteCommand(command, message);
+            command.ExecuteCommand(message);
 
             return Task.CompletedTask;
         }
+
+
 
     }
 }

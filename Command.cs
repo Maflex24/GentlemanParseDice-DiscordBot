@@ -8,22 +8,37 @@ using Discord.WebSocket;
 
 namespace GentelmanParserDiscordBot
 {
-    public static class Command
+    public class Command
     {
-        static Dictionary<string, List<string>> CommandsAndOutputMessages = new Dictionary<string, List<string>>();
-
-        public static bool IsCommandValid(string command)
+        private readonly IDataHandler _dataHandler;
+        static Dictionary<string, List<string>> CommandsAndOutputMessages = new Dictionary<string, List<string>>()
         {
-            if (CommandsAndOutputMessages.Keys.Contains(command))
+            {
+                "onator", new List<string>() {"Eeee! Utopce!"}
+            }
+        };
+
+        public string Content { get; set; }
+
+        public Command(IDataHandler dataHandler) =>
+            _dataHandler = dataHandler;
+
+        public Command(string commandContent) =>
+             Content = commandContent;
+
+
+        public bool IsCommandValid()
+        {
+            if (CommandsAndOutputMessages.Keys.Contains(Content))
                 return true;
 
             return false;
         }
 
-        public static void ExecuteCommand(string command, SocketMessage message)
+        public void ExecuteCommand(SocketMessage message)
         {
             int outputIndex = 0;
-            int outputElements = CommandsAndOutputMessages[command].Count;
+            int outputElements = CommandsAndOutputMessages[Content].Count;
 
             if (outputElements > 1)
             {
@@ -31,7 +46,7 @@ namespace GentelmanParserDiscordBot
                 outputIndex = random.Next(0, outputElements);
             }
 
-            message.Channel.SendMessageAsync(CommandsAndOutputMessages[command][outputIndex]);
+            message.Channel.SendMessageAsync(CommandsAndOutputMessages[Content][outputIndex]);
         }
     }
 }
