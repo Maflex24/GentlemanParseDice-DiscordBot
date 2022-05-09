@@ -11,6 +11,7 @@ namespace GentelmanParserDiscordBot
         public int HowManyRolls { get; set; }
         public int DiceType { get; set; }
         public int bonuses { get; set; }
+        public float PercentOfMaximumResult { get; set; }
 
     }
 }

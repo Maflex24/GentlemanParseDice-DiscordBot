@@ -26,7 +26,9 @@ namespace GentelmanParserDiscordBot
                 rolls.Add(dice.Next(1, rollData.DiceType));
             }
 
-            return $"**{rolls.Sum() + rollData.bonuses}** \n```[{command}] | Rolls: [{string.Join(", ", rolls)}] [{rollData.bonuses}] \nAverage: {Math.Round(rolls.Average(), 2)}```";
+            rollData.PercentOfMaximumResult = (float)rolls.Sum() / ((float)rollData.DiceType * (float)rollData.HowManyRolls) * (float)100;
+
+            return $"**{rolls.Sum() + rollData.bonuses}** \n```[{command}] | Rolls: [{string.Join(", ", rolls)}] [{rollData.bonuses}] \nAverage: {Math.Round(rolls.Average(), 2)} \n{Math.Floor(rollData.PercentOfMaximumResult),2}%```";
         }
 
         private static RollData GetRollData(string command)
