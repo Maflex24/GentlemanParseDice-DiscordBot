@@ -17,6 +17,9 @@ namespace GentelmanParserDiscordBot
             Random dice = new Random();
             List<int> rolls = new List<int>();
 
+            if (rollData == null)
+                return "Use wise numbers please";
+
             if (rollData.HowManyRolls > 30)
                 return "Eeeh, really?";
 
@@ -38,30 +41,38 @@ namespace GentelmanParserDiscordBot
             string isDigidOrMinusDigid = @"\d+|-\d+";
 
             // Rolls Qty
-            var rollsQtyValues = command.TakeWhile(c => Regex.IsMatch(c.ToString(), isDigid)).ToArray();
-            if (rollsQtyValues.Length < 1)
-                rollData.HowManyRolls = 1;
-            else
-                rollData.HowManyRolls = int.Parse(rollsQtyValues);
-
-            // DiceType
-            int dkIndex = command.IndexOfAny(new char[] { 'd', 'k' });
-            var diceTypeValues = command.Substring(dkIndex + 1).TakeWhile(c => Regex.IsMatch(c.ToString(), isDigid)).ToArray();
-            rollData.DiceType = int.Parse(diceTypeValues.ToArray());
-
-            // Bonuses
-            int bonusesStatedIndex = command.IndexOfAny(new char[] { '+', '-' });
-
-            if (bonusesStatedIndex < 0)
-                rollData.bonuses = 0;
-            else
+            try
             {
-                var bonusValues = Regex.Matches(command.Substring(bonusesStatedIndex), isDigidOrMinusDigid);
+                var rollsQtyValues = command.TakeWhile(c => Regex.IsMatch(c.ToString(), isDigid)).ToArray();
+                if (rollsQtyValues.Length < 1)
+                    rollData.HowManyRolls = 1;
+                else
+                    rollData.HowManyRolls = int.Parse(rollsQtyValues);
 
-                foreach (Match element in bonusValues)
+                // DiceType
+                int dkIndex = command.IndexOfAny(new char[] { 'd', 'k' });
+                var diceTypeValues = command.Substring(dkIndex + 1).TakeWhile(c => Regex.IsMatch(c.ToString(), isDigid)).ToArray();
+                rollData.DiceType = int.Parse(diceTypeValues.ToArray());
+
+                // Bonuses
+                int bonusesStatedIndex = command.IndexOfAny(new char[] { '+', '-' });
+
+                if (bonusesStatedIndex < 0)
+                    rollData.bonuses = 0;
+                else
                 {
-                    rollData.bonuses += int.Parse(element.Value);
+                    var bonusValues = Regex.Matches(command.Substring(bonusesStatedIndex), isDigidOrMinusDigid);
+
+                    foreach (Match element in bonusValues)
+                    {
+                        rollData.bonuses += int.Parse(element.Value);
+                    }
                 }
+            }
+            catch (Exception notCorrectNumber)
+            {
+                Console.WriteLine("Too big number for int type");
+                return null;
             }
 
             return rollData;
