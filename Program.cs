@@ -18,7 +18,6 @@ namespace GentelmanParserDiscordBot
             _client = new DiscordSocketClient();
             _client.MessageReceived += CommandHandler.Handler;
             _client.Log += Log;
-            IDataHandler dataHandler = DataHandler.CreateHandler();
 
             var token = File.ReadAllText("../../../token.txt");
 

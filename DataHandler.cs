@@ -15,19 +15,19 @@ namespace GentelmanParserDiscordBot
     {
         private static bool objectExist = false;
 
-        private DataHandler() { }
+        public DataHandler() { }
 
-        public static DataHandler CreateHandler()
-        {
-            if (!objectExist)
-            {
-                objectExist = true;
-                DataHandler dataHandler = new DataHandler();
-                return dataHandler;
-            }
+        //public static DataHandler CreateHandler()
+        //{
+        //    if (!objectExist)
+        //    {
+        //        objectExist = true;
+        //        DataHandler dataHandler = new DataHandler();
+        //        return dataHandler;
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
         public string GiveSomeString() => "utopce.exe";
     }

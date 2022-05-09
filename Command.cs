@@ -20,12 +20,11 @@ namespace GentelmanParserDiscordBot
 
         public string Content { get; set; }
 
-        public Command(IDataHandler dataHandler) =>
-            _dataHandler = dataHandler;
-
-        public Command(string commandContent) =>
-             Content = commandContent;
-
+        public Command(string commandContent)
+        {
+            Content = commandContent;
+            _dataHandler = new DataHandler();
+        }
 
         public bool IsCommandValid()
         {
