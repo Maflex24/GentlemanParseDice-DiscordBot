@@ -11,24 +11,19 @@ namespace GentelmanParserDiscordBot
     public class Command
     {
         private readonly IDataHandler _dataHandler;
-        static Dictionary<string, List<string>> CommandsAndOutputMessages = new Dictionary<string, List<string>>()
-        {
-            {
-                "onator", new List<string>() {"Eeee! Utopce!"}
-            }
-        };
+        private static Dictionary<string, List<string>> CommandsAndOutputMessages = DataHandler.GetCommandsList();
 
-        public string Content { get; set; }
+        public string CommandContent { get; set; }
 
-        public Command(string commandContent)
+        public Command(string commandCommandContent)
         {
-            Content = commandContent;
+            CommandContent = commandCommandContent;
             _dataHandler = new DataHandler();
         }
 
         public bool IsCommandValid()
         {
-            if (CommandsAndOutputMessages.Keys.Contains(Content))
+            if (CommandsAndOutputMessages.Keys.Contains(CommandContent))
                 return true;
 
             return false;
@@ -37,7 +32,7 @@ namespace GentelmanParserDiscordBot
         public void ExecuteCommand(SocketMessage message)
         {
             int outputIndex = 0;
-            int outputElements = CommandsAndOutputMessages[Content].Count;
+            int outputElements = CommandsAndOutputMessages[CommandContent].Count;
 
             if (outputElements > 1)
             {
@@ -45,7 +40,7 @@ namespace GentelmanParserDiscordBot
                 outputIndex = random.Next(0, outputElements);
             }
 
-            message.Channel.SendMessageAsync(CommandsAndOutputMessages[Content][outputIndex]);
+            message.Channel.SendMessageAsync(CommandsAndOutputMessages[CommandContent][outputIndex]);
         }
     }
 }

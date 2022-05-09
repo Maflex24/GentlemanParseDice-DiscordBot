@@ -19,7 +19,6 @@ namespace GentelmanParserDiscordBot
 
         public static Task Handler(SocketMessage message)
         {
-            string commandContent = "";
             int lengthOfCommand = -1;
 
             //filtering messages begin here
@@ -36,9 +35,9 @@ namespace GentelmanParserDiscordBot
 
             Command command = new Command(message.Content.Substring(1, lengthOfCommand - 1).ToLower());
 
-            if (DiceParser.IsADiceRoll(command.Content))
+            if (DiceParser.IsADiceRoll(command.CommandContent))
             {
-                message.Channel.SendMessageAsync(message.Author.Mention + ": " + DiceParser.Roll(command.Content));
+                message.Channel.SendMessageAsync(message.Author.Mention + ": " + DiceParser.Roll(command.CommandContent));
                 return Task.CompletedTask;
             }
 
