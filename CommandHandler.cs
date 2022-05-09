@@ -19,7 +19,6 @@ namespace GentelmanParserDiscordBot
 
         public static Task Handler(SocketMessage message)
         {
-            //variables
             string commandContent = "";
             int lengthOfCommand = -1;
 
