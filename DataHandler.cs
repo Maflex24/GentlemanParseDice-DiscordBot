@@ -1,34 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace GentelmanParserDiscordBot
 {
     public interface IDataHandler
     {
-        public string GiveSomeString();
+        public static Dictionary<string, List<string>> GetCommandsList() => GetCommandsList();
     }
 
     public class DataHandler : IDataHandler
     {
         private static bool objectExist = false;
 
-        public DataHandler() { }
+        private static string path = File.ReadAllText("../../../path.txt");
 
-        //public static DataHandler CreateHandler()
-        //{
-        //    if (!objectExist)
-        //    {
-        //        objectExist = true;
-        //        DataHandler dataHandler = new DataHandler();
-        //        return dataHandler;
-        //    }
+        public static Dictionary<string, List<string>> GetCommandsList()
+        {
+            Dictionary<string, List<string>> outDictionary = new Dictionary<string, List<string>>();
 
-        //    return null;
-        //}
+            string fileContext = File.ReadAllText(path);
 
-        public string GiveSomeString() => "utopce.exe";
+            return outDictionary = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(fileContext);
+        }
     }
 }

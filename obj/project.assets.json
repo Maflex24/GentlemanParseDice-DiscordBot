@@ -497,7 +497,8 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "Discord.Net >= 3.6.1"
+      "Discord.Net >= 3.6.1",
+      "Newtonsoft.Json >= 13.0.1"
     ]
   },
   "packageFolders": {
@@ -547,6 +548,10 @@
           "Discord.Net": {
             "target": "Package",
             "version": "[3.6.1, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.1, )"
           }
         },
         "imports": [
