@@ -51,8 +51,5 @@ namespace GentelmanParserDiscordBot
 
             return Task.CompletedTask;
         }
-
-
-
     }
 }
