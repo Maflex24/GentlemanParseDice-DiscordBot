@@ -23,10 +23,10 @@ namespace GentelmanParserDiscordBot
             if (rollData.HowManyRolls > 30)
                 return "Eeeh, really?";
 
-            for (int i = 0; i <= rollData.HowManyRolls; i++)
+            for (int i = 0; i < rollData.HowManyRolls; i++)
             {
                 Thread.Sleep(2);
-                rolls.Add(dice.Next(1, rollData.DiceType));
+                rolls.Add(dice.Next(1, rollData.DiceType + 1));
             }
 
             rollData.PercentOfMaximumResult = (float)rolls.Sum() / ((float)rollData.DiceType * (float)rollData.HowManyRolls) * (float)100;

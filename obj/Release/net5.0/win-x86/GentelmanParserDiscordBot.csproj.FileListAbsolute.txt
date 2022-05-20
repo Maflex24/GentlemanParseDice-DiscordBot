@@ -2,8 +2,6 @@ D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\Gentel
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\GentelmanParserDiscordBot.runtimeconfig.json
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\GentelmanParserDiscordBot.runtimeconfig.dev.json
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\GentelmanParserDiscordBot.exe
-D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\GentelmanParserDiscordBot.dll.manifest
-D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\GentelmanParserDiscordBot.application
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\GentelmanParserDiscordBot.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\ref\GentelmanParserDiscordBot.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\GentelmanParserDiscordBot.pdb
@@ -189,7 +187,6 @@ D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\api-ms
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\api-ms-win-core-datetime-l1-1-0.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\api-ms-win-core-debug-l1-1-0.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\api-ms-win-core-errorhandling-l1-1-0.dll
-D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\api-ms-win-core-fibers-l1-1-0.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\api-ms-win-core-file-l1-1-0.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\api-ms-win-core-file-l1-2-0.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\api-ms-win-core-file-l2-1-0.dll
@@ -235,7 +232,6 @@ D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\dbgshi
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\hostfxr.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\hostpolicy.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\mscordaccore.dll
-D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\mscordaccore_x86_x86_5.0.1622.16705.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\mscordbi.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\mscorrc.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\ucrtbase.dll
@@ -244,9 +240,9 @@ D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\Gentel
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\GentelmanParserDiscordBot.AssemblyInfo.cs
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\GentelmanParserDiscordBot.csproj.CoreCompileInputs.cache
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\GentelmanParserDiscordBot.genruntimeconfig.cache
-D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\GentelmanParserDiscordBot.dll.manifest
-D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\GentelmanParserDiscordBot.application
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\GentelmanParserDiscordBot.csproj.CopyComplete
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\GentelmanParserDiscordBot.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\ref\GentelmanParserDiscordBot.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\GentelmanParserDiscordBot.pdb
+D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\mscordaccore_x86_x86_5.0.1221.52207.dll
+D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\GentelmanParserDiscordBot.csproj.AssemblyReference.cache
