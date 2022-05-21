@@ -11,7 +11,8 @@ namespace GentelmanParserDiscordBot
     public class Command
     {
         private readonly IDataHandler _dataHandler;
-        private static Dictionary<string, List<string>> CommandsAndOutputMessages = DataHandler.GetCommandsList();
+        private static Dictionary<string, List<string>> commandsAndOutputMessages = DataHandler.GetCommandsList();
+        private static Dictionary<string, int> lastCommandIndex = getLastCommandIndex();
 
         public string CommandContent { get; set; }
 
@@ -21,9 +22,21 @@ namespace GentelmanParserDiscordBot
             _dataHandler = new DataHandler();
         }
 
+        private static Dictionary<string, int> getLastCommandIndex()
+        {
+            Dictionary<string, int> output = new Dictionary<string, int>();
+
+            foreach (var command in commandsAndOutputMessages.Keys)
+            {
+                output.Add(command, 0);
+            }
+
+            return output;
+        }
+
         public bool IsCommandValid()
         {
-            if (CommandsAndOutputMessages.Keys.Contains(CommandContent))
+            if (commandsAndOutputMessages.Keys.Contains(CommandContent))
                 return true;
 
             return false;
@@ -31,16 +44,20 @@ namespace GentelmanParserDiscordBot
 
         public void ExecuteCommand(SocketMessage message)
         {
-            int outputIndex = 0;
-            int outputElements = CommandsAndOutputMessages[CommandContent].Count;
+            int outputElements = commandsAndOutputMessages[CommandContent].Count;
+            int lastIndex = lastCommandIndex[CommandContent];
 
             if (outputElements > 1)
             {
-                Random random = new Random();
-                outputIndex = random.Next(0, outputElements);
+                if (lastIndex + 1 == outputElements)
+                    lastCommandIndex[CommandContent] = 0;
+                else
+                    lastCommandIndex[CommandContent]++;
+
+                lastIndex = lastCommandIndex[CommandContent];
             }
 
-            message.Channel.SendMessageAsync(CommandsAndOutputMessages[CommandContent][outputIndex]);
+            message.Channel.SendMessageAsync(commandsAndOutputMessages[CommandContent][lastIndex]);
         }
     }
 }
