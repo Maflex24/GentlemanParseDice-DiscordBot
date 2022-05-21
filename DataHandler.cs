@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace GentelmanParserDiscordBot
+namespace GentlemanParserDiscordBot
 {
     public interface IDataHandler
     {
@@ -15,15 +15,13 @@ namespace GentelmanParserDiscordBot
 
     public class DataHandler : IDataHandler
     {
-        private static bool objectExist = false;
-
-        private static string path = File.ReadAllText("../../../path.txt");
+        private static string commandListPath = DevelopmentInfo.GetCommandListPath();
 
         public static Dictionary<string, List<string>> GetCommandsList()
         {
             Dictionary<string, List<string>> outDictionary = new Dictionary<string, List<string>>();
 
-            string fileContext = File.ReadAllText(path);
+            string fileContext = File.ReadAllText(commandListPath);
 
             return outDictionary = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(fileContext);
         }

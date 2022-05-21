@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 
-namespace GentelmanParserDiscordBot
+namespace GentlemanParserDiscordBot
 {
     public class Command
     {
         private readonly IDataHandler _dataHandler;
-        private static Dictionary<string, List<string>> commandsAndOutputMessages = DataHandler.GetCommandsList();
-        private static Dictionary<string, int> lastCommandIndex = getLastCommandIndex();
+        private static readonly Dictionary<string, List<string>> commandsAndOutputMessages = DataHandler.GetCommandsList();
+        private static readonly Dictionary<string, int> lastCommandIndex = getLastCommandIndex();
 
         public string CommandContent { get; set; }
 

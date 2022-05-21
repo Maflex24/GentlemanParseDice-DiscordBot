@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 
-namespace GentelmanParserDiscordBot
+namespace GentlemanParserDiscordBot
 {
     public class CommandHandler
     {
