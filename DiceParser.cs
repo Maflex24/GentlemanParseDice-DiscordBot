@@ -28,7 +28,10 @@ namespace GentlemanParserDiscordBot
             }
 
             string output = $"**{rollData.Rolls.Sum() + rollData.bonuses}**\n";
-            output += $"```[{command}] | Rolls: [{string.Join(", ", rollData.Rolls)}] [{rollData.bonuses}] ";
+            output += $"```[{command}] | Rolls: [{string.Join(", ", rollData.Rolls)}]";
+
+            if (rollData.bonuses != 0)
+                output += $" [{rollData.bonuses}]";
 
             if (rollData.HowManyRolls > 1)
                 output += $"\nAverage: {Math.Round(rollData.Rolls.Average(), 2)}";
