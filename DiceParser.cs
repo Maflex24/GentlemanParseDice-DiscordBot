@@ -13,9 +13,7 @@ namespace GentlemanParserDiscordBot
         public static string Roll(string command)
         {
             RollData rollData = DiceParser.GetRollData(command);
-
             Random dice = new Random();
-            List<int> rolls = new List<int>();
 
             if (rollData == null)
                 return "Use wise numbers please";
@@ -25,13 +23,25 @@ namespace GentlemanParserDiscordBot
 
             for (int i = 0; i < rollData.HowManyRolls; i++)
             {
-                Thread.Sleep(2);
-                rolls.Add(dice.Next(1, rollData.DiceType + 1));
+                Thread.Sleep(1);
+                rollData.Rolls.Add(dice.Next(1, rollData.DiceType + 1));
             }
 
-            rollData.PercentOfMaximumResult = (float)rolls.Sum() / ((float)rollData.DiceType * (float)rollData.HowManyRolls) * (float)100;
+            string output = $"**{rollData.Rolls.Sum() + rollData.bonuses}**\n";
+            output += $"```[{command}] | Rolls: [{string.Join(", ", rollData.Rolls)}] [{rollData.bonuses}] ";
 
-            return $"**{rolls.Sum() + rollData.bonuses}** \n```[{command}] | Rolls: [{string.Join(", ", rolls)}] [{rollData.bonuses}] \nAverage: {Math.Round(rolls.Average(), 2)} \n{Math.Floor(rollData.PercentOfMaximumResult),2}%```";
+            if (rollData.HowManyRolls > 1)
+                output += $"\nAverage: {Math.Round(rollData.Rolls.Average(), 2)}";
+
+            if (rollData.DiceType != 10 && rollData.HowManyRolls > 1)
+            {
+                rollData.PercentOfMaximumResult = (float)rollData.Rolls.Sum() / ((float)rollData.DiceType * (float)rollData.HowManyRolls) * (float)100;
+                output += $"\n{Math.Floor(rollData.PercentOfMaximumResult),2}%";
+            }
+
+            output += "```";
+
+            return output;
         }
 
         private static RollData GetRollData(string command)
