@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GentelmanParserDiscordBot
+namespace GentlemanParserDiscordBot
 {
     public class DiceParser
     {
