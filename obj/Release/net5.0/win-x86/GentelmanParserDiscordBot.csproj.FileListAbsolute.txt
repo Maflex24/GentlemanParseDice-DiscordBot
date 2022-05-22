@@ -244,5 +244,6 @@ D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\Gentel
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\GentelmanParserDiscordBot.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\ref\GentelmanParserDiscordBot.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\GentelmanParserDiscordBot.pdb
-D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\mscordaccore_x86_x86_5.0.1221.52207.dll
 D:\DEVs\Projects\GentlemanParseDice-DiscordBot\obj\Release\net5.0\win-x86\GentelmanParserDiscordBot.csproj.AssemblyReference.cache
+D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\api-ms-win-core-fibers-l1-1-0.dll
+D:\DEVs\Projects\GentlemanParseDice-DiscordBot\bin\Release\net5.0\win-x86\mscordaccore_x86_x86_5.0.1722.21314.dll
