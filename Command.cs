@@ -48,7 +48,7 @@ namespace GentlemanParserDiscordBot
             int outputElements = commandsAndOutputMessages[CommandContent].Count;
             int lastIndex = lastCommandIndex[CommandContent];
 
-            if (outputElements > 1)
+            if (outputElements > 1 && outputElements <= 4)
             {
                 if (lastIndex + 1 == outputElements)
                     lastCommandIndex[CommandContent] = 0;
@@ -56,6 +56,12 @@ namespace GentlemanParserDiscordBot
                     lastCommandIndex[CommandContent]++;
 
                 lastIndex = lastCommandIndex[CommandContent];
+            }
+
+            if (outputElements > 1 && outputElements > 4)
+            {
+                Random random = new Random();
+                lastIndex = random.Next(0, outputElements - 1);
             }
 
             var currentReply = commandsAndOutputMessages[CommandContent][lastIndex];
