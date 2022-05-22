@@ -1,0 +1,6 @@
+\\GABOHP\Documents\GentlemanParser\GentelmanParserDiscordBot.pdb
+\\GABOHP\Documents\GentlemanParser\clrcompression.dll
+\\GABOHP\Documents\GentlemanParser\clrjit.dll
+\\GABOHP\Documents\GentlemanParser\coreclr.dll
+\\GABOHP\Documents\GentlemanParser\mscordaccore.dll
+\\GABOHP\Documents\GentlemanParser\GentelmanParserDiscordBot.exe

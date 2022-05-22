@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,6 +56,13 @@ namespace GentlemanParserDiscordBot
                     lastCommandIndex[CommandContent]++;
 
                 lastIndex = lastCommandIndex[CommandContent];
+            }
+
+            var currentReply = commandsAndOutputMessages[CommandContent][lastIndex];
+            if (currentReply.Contains(".jpg") || currentReply.Contains(".png"))
+            {
+                message.Channel.SendFileAsync(new FileAttachment(Path.Combine(DevelopmentInfo.GetImagesPath(), currentReply)));
+                return;
             }
 
             message.Channel.SendMessageAsync(commandsAndOutputMessages[CommandContent][lastIndex]);
