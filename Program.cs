@@ -3,6 +3,7 @@ using Discord.WebSocket;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using GentelmanParserDiscordBot;
 using GentlemanParserDiscordBot;
 
 namespace GentlemanParserDiscordBot
@@ -19,15 +20,8 @@ namespace GentlemanParserDiscordBot
             _client.MessageReceived += CommandHandler.Handler;
             _client.Log += Log;
 
-            string token;
-
-            if (File.Exists("DevelopmentToken.txt"))
-            {
-                token = File.ReadAllText("DevelopmentToken.txt");
-                DevelopmentInfo.SetInDevelopmentStatus();
-            }
-            else
-                token = File.ReadAllText("token.txt");
+            var tokenHandler = new TokenHandler();
+            var token = tokenHandler.GetToken();
 
             await _client.LoginAsync(TokenType.Bot, token);
             await _client.StartAsync();

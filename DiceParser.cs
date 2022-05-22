@@ -57,15 +57,12 @@ namespace GentlemanParserDiscordBot
             try
             {
                 var rollsQtyValues = command.TakeWhile(c => Regex.IsMatch(c.ToString(), isDigid)).ToArray();
-                if (rollsQtyValues.Length < 1)
-                    rollData.HowManyRolls = 1;
-                else
-                    rollData.HowManyRolls = int.Parse(rollsQtyValues);
+                rollData.HowManyRolls = rollsQtyValues.Length < 1 ? 1 : int.Parse(rollsQtyValues);
 
                 // DiceType
-                int dkIndex = command.IndexOfAny(new char[] { 'd', 'k' });
+                var dkIndex = command.IndexOfAny(new char[] { 'd', 'k' });
                 var diceTypeValues = command.Substring(dkIndex + 1).TakeWhile(c => Regex.IsMatch(c.ToString(), isDigid)).ToArray();
-                rollData.DiceType = int.Parse(diceTypeValues.ToArray());
+                rollData.DiceType = int.Parse(diceTypeValues);
 
                 // Bonuses
                 int bonusesStatedIndex = command.IndexOfAny(new char[] { '+', '-' });
@@ -92,15 +89,7 @@ namespace GentlemanParserDiscordBot
         }
 
 
-        public static bool IsADiceRoll(string command)
-        {
-            if (command == null)
-                return false;
+        public static bool IsADiceRoll(string command) => Regex.Matches(command, @"d\d+|k\d").Count > 0;
 
-            if (Regex.Matches(command, @"d\d+|k\d").Count > 0)
-                return true;
-
-            return false;
-        }
     }
 }
