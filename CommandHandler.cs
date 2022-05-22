@@ -19,21 +19,12 @@ namespace GentlemanParserDiscordBot
 
         public static Task Handler(SocketMessage message)
         {
-            int lengthOfCommand = -1;
-
-            //filtering messages begin here
-            if (!message.Content.StartsWith('!')) //This is your prefix
+            if (!message.Content.StartsWith(DevelopmentInfo.CommandPrefix) || message.Author.IsBot)
                 return Task.CompletedTask;
 
-            if (message.Author.IsBot) //This ignores all commands from bots
-                return Task.CompletedTask;
+            int lengthOfCommand = message.Content.Contains(' ') ? message.Content.IndexOf(' ') : message.Content.Length;
+            var command = new Command(message.Content.Substring(1, lengthOfCommand - 1).ToLower());
 
-            if (message.Content.Contains(' '))
-                lengthOfCommand = message.Content.IndexOf(' ');
-            else
-                lengthOfCommand = message.Content.Length;
-
-            Command command = new Command(message.Content.Substring(1, lengthOfCommand - 1).ToLower());
 
             if (DiceParser.IsADiceRoll(command.CommandContent))
             {
@@ -48,7 +39,6 @@ namespace GentlemanParserDiscordBot
             }
 
             command.ExecuteCommand(message);
-
             return Task.CompletedTask;
         }
     }
