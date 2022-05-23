@@ -28,7 +28,7 @@ namespace GentlemanParserDiscordBot
 
             if (DiceParser.IsADiceRoll(command.CommandContent))
             {
-                message.Channel.SendMessageAsync(message.Author.Mention + ": " + DiceParser.Roll(command.CommandContent));
+                message.Channel.SendMessageAsync(message.Author.Mention + ": " + DiceParser.RollOutput(command.CommandContent));
                 return Task.CompletedTask;
             }
 

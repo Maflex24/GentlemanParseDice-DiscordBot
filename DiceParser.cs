@@ -10,10 +10,9 @@ namespace GentlemanParserDiscordBot
 {
     public class DiceParser
     {
-        public static string Roll(string command)
+        public static string RollOutput(string command)
         {
-            RollData rollData = DiceParser.GetRollData(command);
-            Random dice = new Random();
+            RollData rollData = GetRollBasicsInformation(command);
 
             if (rollData == null)
                 return "Use wise numbers please";
@@ -21,33 +20,64 @@ namespace GentlemanParserDiscordBot
             if (rollData.HowManyRolls > 30)
                 return "Eeeh, really?";
 
+            Roll(ref rollData);
+            GetRollDetails(ref rollData);
+
+            return OutputFormatter(rollData);
+        }
+
+        private static string OutputFormatter(RollData rollData)
+        {
+            StringBuilder output = new StringBuilder();
+
+            output.Append($"**{rollData.Sum}**");
+            output.Append("\n```\n");
+
+            output.Append($"{rollData.HowManyRolls}d{rollData.DiceType}");
+
+            if (rollData.Bonuses != 0)
+            {
+                if (rollData.Bonuses > 0) output.Append("+");
+                output.Append(rollData.Bonuses);
+            }
+
+            output.Append(" | ");
+            output.Append($"[{String.Join(", ", rollData.Rolls)}]");
+
+            if (rollData.Bonuses != 0)
+                output.Append($" [{rollData.Bonuses}]");
+
+            if (rollData.HowManyRolls > 1)
+                output.Append($"\nAverage: {rollData.Average}");
+
+            if (rollData.DiceType != 10 && rollData.HowManyRolls > 1)
+                output.Append($"\nPower: {rollData.PercentOfMaximumResult}%");
+
+            output.Append("\n```");
+
+            return output.ToString();
+        }
+
+        public static void GetRollDetails(ref RollData rollData) // average, percent
+        {
+            rollData.Average = Math.Round(rollData.Rolls.Average(), 2);
+            rollData.PercentOfMaximumResult = (decimal)rollData.Rolls.Sum() / ((decimal)rollData.DiceType * (decimal)rollData.HowManyRolls) * (decimal)100;
+            rollData.PercentOfMaximumResult = Math.Floor(rollData.PercentOfMaximumResult);
+        }
+
+        public static void Roll(ref RollData rollData)
+        {
+            Random dice = new Random();
+
             for (int i = 0; i < rollData.HowManyRolls; i++)
             {
                 Thread.Sleep(1);
                 rollData.Rolls.Add(dice.Next(1, rollData.DiceType + 1));
             }
-
-            string output = $"**{rollData.Rolls.Sum() + rollData.bonuses}**\n";
-            output += $"```[{command}] | Rolls: [{string.Join(", ", rollData.Rolls)}]";
-
-            if (rollData.bonuses != 0)
-                output += $" [{rollData.bonuses}]";
-
-            if (rollData.HowManyRolls > 1)
-                output += $"\nAverage: {Math.Round(rollData.Rolls.Average(), 2)}";
-
-            if (rollData.DiceType != 10 && rollData.HowManyRolls > 1)
-            {
-                rollData.PercentOfMaximumResult = (float)rollData.Rolls.Sum() / ((float)rollData.DiceType * (float)rollData.HowManyRolls) * (float)100;
-                output += $"\n{Math.Floor(rollData.PercentOfMaximumResult),2}%";
-            }
-
-            output += "```";
-
-            return output;
+            rollData.Sum = rollData.Rolls.Sum() + rollData.Bonuses;
         }
 
-        private static RollData GetRollData(string command)
+        public static RollData GetRollBasicsInformation(string command)
         {
             RollData rollData = new RollData();
             string isDigid = @"\d";
@@ -68,14 +98,14 @@ namespace GentlemanParserDiscordBot
                 int bonusesStatedIndex = command.IndexOfAny(new char[] { '+', '-' });
 
                 if (bonusesStatedIndex < 0)
-                    rollData.bonuses = 0;
+                    rollData.Bonuses = 0;
                 else
                 {
                     var bonusValues = Regex.Matches(command.Substring(bonusesStatedIndex), isDigidOrMinusDigid);
 
                     foreach (Match element in bonusValues)
                     {
-                        rollData.bonuses += int.Parse(element.Value);
+                        rollData.Bonuses += int.Parse(element.Value);
                     }
                 }
             }
