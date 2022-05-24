@@ -20,6 +20,10 @@ namespace GentlemanParserDiscordBot.Tests
         [InlineData("10d10-4")]
         [InlineData("15k10+4+4")]
         [InlineData("15d10-4-4")]
+        [InlineData("30d6")]
+        [InlineData("10d6")]
+        [InlineData("2d10")]
+        [InlineData("30d60")]
         public void IsADiceRoll_ForStringInput_ReturnTrue(string command)
         {
             var result = DiceParser.IsADiceRoll(command);
@@ -35,6 +39,8 @@ namespace GentlemanParserDiscordBot.Tests
         [InlineData("1k+4")]
         [InlineData("1k-1")]
         [InlineData("5dk5")]
+        [InlineData("5d01")]
+        [InlineData("5k05")]
         public void IsADiceRoll_ForStringInput_ReturnFalse(string command)
         {
             var result = DiceParser.IsADiceRoll(command);
