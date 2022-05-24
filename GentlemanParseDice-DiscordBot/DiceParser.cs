@@ -119,7 +119,7 @@ namespace GentlemanParserDiscordBot
         }
 
 
-        public static bool IsADiceRoll(string command) => Regex.Matches(command, @"d\d+|k\d").Count > 0;
+        public static bool IsADiceRoll(string command) => Regex.IsMatch(command, @"^\d*d\d+[-|+|\d]+|^\d*k\d+[-|+|\d]+");
 
     }
 }
