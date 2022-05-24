@@ -61,7 +61,7 @@ namespace GentlemanParserDiscordBot
             if (outputElements > 1 && outputElements > 4)
             {
                 Random random = new Random();
-                lastIndex = random.Next(0, outputElements - 1);
+                lastIndex = random.Next(0, outputElements);
             }
 
             var currentReply = commandsAndOutputMessages[CommandContent][lastIndex];
