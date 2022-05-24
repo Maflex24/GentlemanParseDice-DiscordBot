@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace GentlemanParserDiscordBot.Tests
 {
@@ -16,6 +17,7 @@ namespace GentlemanParserDiscordBot.Tests
         [InlineData("1d10")]
         [InlineData("1k10+4")]
         [InlineData("1d10-4")]
+        [InlineData("10d10-4")]
         [InlineData("15k10+4+4")]
         [InlineData("15d10-4-4")]
         public void IsADiceRoll_ForStringInput_ReturnTrue(string command)
@@ -25,9 +27,14 @@ namespace GentlemanParserDiscordBot.Tests
         }
 
         [Theory]
-        [InlineData("dk10")]
+        [InlineData("0d10")]
+        [InlineData("-5d10")]
         [InlineData("-1d10")]
-        [InlineData("-110")]
+        [InlineData("+1d5")]
+        [InlineData("1d+4")]
+        [InlineData("1k+4")]
+        [InlineData("1k-1")]
+        [InlineData("5dk5")]
         public void IsADiceRoll_ForStringInput_ReturnFalse(string command)
         {
             var result = DiceParser.IsADiceRoll(command);
@@ -93,10 +100,10 @@ namespace GentlemanParserDiscordBot.Tests
 
         [Theory]
         [InlineData("30d6", 2, 5)]
-        [InlineData("30d10", 4, 6)]
-        [InlineData("30d20", 8, 12)]
-        [InlineData("30d100", 40, 60)]
-        public void Roll_ForRollCommand_CheckIsAverageInNorm(string command, int min, int max)
+        [InlineData("30d10", 4, 6.5)]
+        [InlineData("30d20", 8, 12.5)]
+        [InlineData("30d100", 40, 60.5)]
+        public void Roll_ForRollCommand_CheckIsAverageInNorm(string command, double min, double max)
         {
             var rollData = DiceParser.GetRollBasicsInformation(command);
             DiceParser.Roll(ref rollData);
@@ -106,7 +113,7 @@ namespace GentlemanParserDiscordBot.Tests
         }
 
         [Theory]
-        [InlineData("30d6", 1, 6)]
+        [InlineData("40d6", 1, 6)]
         [InlineData("60d10", 1, 10)]
         [InlineData("120d20", 1, 20)]
         [InlineData("600d100", 1, 100)]
@@ -122,5 +129,39 @@ namespace GentlemanParserDiscordBot.Tests
             Assert.Equal(max, maxRolled);
         }
 
+        [Theory]
+        [InlineData("50d6", 4)]
+        [InlineData("50d10", 3)]
+        [InlineData("50d100", 2)]
+        public void Roll_ForRollCommand_CheckIsRollNotRepeatValueMoreThanNTimesInRow(string command, int moreThanIsBad)
+        {
+            var rollData = DiceParser.GetRollBasicsInformation(command);
+            DiceParser.Roll(ref rollData);
+
+            var lastRoll = rollData.Rolls[0];
+            int sameValueCount = 1;
+            bool moreThanNInRow = false;
+            for (int i = 1; i < rollData.Rolls.Count; i++)
+            {
+                var currentValue = rollData.Rolls[i];
+
+                if (currentValue == lastRoll)
+                {
+                    sameValueCount++;
+                    continue;
+                }
+
+                if (sameValueCount > moreThanIsBad)
+                {
+                    moreThanNInRow = true;
+                    break;
+                }
+
+                lastRoll = currentValue;
+                sameValueCount = 1;
+            }
+
+            Assert.False(moreThanNInRow);
+        }
     }
 }
