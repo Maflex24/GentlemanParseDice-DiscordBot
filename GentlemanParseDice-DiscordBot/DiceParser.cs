@@ -71,7 +71,6 @@ namespace GentlemanParserDiscordBot
 
             for (int i = 0; i < rollData.HowManyRolls; i++)
             {
-                Thread.Sleep(1);
                 rollData.Rolls.Add(dice.Next(1, rollData.DiceType + 1));
             }
             rollData.Sum = rollData.Rolls.Sum() + rollData.Bonuses;
@@ -119,7 +118,7 @@ namespace GentlemanParserDiscordBot
         }
 
 
-        public static bool IsADiceRoll(string command) => Regex.IsMatch(command, @"^\d*d\d+[-|+|\d]+|^\d*k\d+[-|+|\d]+");
+        public static bool IsADiceRoll(string command) => Regex.IsMatch(command, @"^d[0-9]\d*[-|+|\d]+|^k[0-9]\d*[-|+|\d]+|^[1-9]\d*[d|k][0-9]\d*[-|+|\d]+");
 
     }
 }
