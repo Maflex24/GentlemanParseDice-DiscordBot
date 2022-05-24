@@ -71,9 +71,9 @@ namespace GentlemanParserDiscordBot
 
             for (int i = 0; i < rollData.HowManyRolls; i++)
             {
-                int roll = RandomNumberGenerator.Between(1, rollData.DiceType);
-                rollData.Rolls.Add(roll);
+                rollData.Rolls.Add(dice.Next(1, rollData.DiceType + 1));
             }
+
             rollData.Sum = rollData.Rolls.Sum() + rollData.Bonuses;
         }
 
