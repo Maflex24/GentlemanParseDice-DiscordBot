@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PIlFidFzNeWTEkFWIbNV9a422/FMQd94OqEFTstVkWZS3nXpe/H6FhVPNnS5F3X5lyqz0EgCGRau6DALfzilrg==",
+  "dgSpecHash": "arFtVxyarU7Av3BDfvJiIVdNL05yWPvqLKeXscX6wUJNf6V23ELomRjG6dcvkRJbLueuC3TgMfCP8DGvGgVBsQ==",
   "success": true,
-  "projectFilePath": "D:\\DEVs\\Projects\\GentlemanParseDice-DiscordBot\\GentelmanParserDiscordBot.csproj",
+  "projectFilePath": "D:\\DEVs\\Projects\\GentlemanDiceParserDiscordBot\\GentlemanParseDice-DiscordBot\\GentelmanParserDiscordBot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Gabriel\\.nuget\\packages\\discord.net\\3.6.1\\discord.net.3.6.1.nupkg.sha512",
     "C:\\Users\\Gabriel\\.nuget\\packages\\discord.net.commands\\3.6.1\\discord.net.commands.3.6.1.nupkg.sha512",
