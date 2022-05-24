@@ -1,0 +1,6 @@
+D:\DEVs\Published\GentlemanParser\GentelmanParserDiscordBot.pdb
+D:\DEVs\Published\GentlemanParser\clrcompression.dll
+D:\DEVs\Published\GentlemanParser\clrjit.dll
+D:\DEVs\Published\GentlemanParser\coreclr.dll
+D:\DEVs\Published\GentlemanParser\mscordaccore.dll
+D:\DEVs\Published\GentlemanParser\GentelmanParserDiscordBot.exe

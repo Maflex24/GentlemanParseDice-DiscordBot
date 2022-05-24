@@ -1,0 +1,8 @@
+token.txt
+bin/Debug
+.vs/
+obj/Debug/*
+images/
+multicommands.json
+path.txt
+DevelopmentToken.txt
