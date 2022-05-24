@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DEVs\\Projects\\GentlemanParseDice-DiscordBot\\GentelmanParserDiscordBot.csproj": {}
+    "D:\\DEVs\\Projects\\GentlemanDiceParserDiscordBot\\GentlemanParseDice-DiscordBot\\GentelmanParserDiscordBot.csproj": {}
   },
   "projects": {
-    "D:\\DEVs\\Projects\\GentlemanParseDice-DiscordBot\\GentelmanParserDiscordBot.csproj": {
+    "D:\\DEVs\\Projects\\GentlemanDiceParserDiscordBot\\GentlemanParseDice-DiscordBot\\GentelmanParserDiscordBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DEVs\\Projects\\GentlemanParseDice-DiscordBot\\GentelmanParserDiscordBot.csproj",
+        "projectUniqueName": "D:\\DEVs\\Projects\\GentlemanDiceParserDiscordBot\\GentlemanParseDice-DiscordBot\\GentelmanParserDiscordBot.csproj",
         "projectName": "GentelmanParserDiscordBot",
-        "projectPath": "D:\\DEVs\\Projects\\GentlemanParseDice-DiscordBot\\GentelmanParserDiscordBot.csproj",
+        "projectPath": "D:\\DEVs\\Projects\\GentlemanDiceParserDiscordBot\\GentlemanParseDice-DiscordBot\\GentelmanParserDiscordBot.csproj",
         "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-        "outputPath": "D:\\DEVs\\Projects\\GentlemanParseDice-DiscordBot\\obj\\",
+        "outputPath": "D:\\DEVs\\Projects\\GentlemanDiceParserDiscordBot\\GentlemanParseDice-DiscordBot\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

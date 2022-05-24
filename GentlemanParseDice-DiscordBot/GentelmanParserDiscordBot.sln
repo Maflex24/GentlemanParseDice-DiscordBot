@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GentelmanParserDiscordBot", "GentelmanParserDiscordBot.csproj", "{3FD1E2BA-A401-4BA4-B372-B7D43E953748}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GentlemanParserDiscordBot.Tests", "Tests\GentlemanParserDiscordBot.Tests\GentlemanParserDiscordBot.Tests.csproj", "{609B5BAF-8E4D-4D73-8631-7DB68898D1D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GentlemanParserDiscordBot.Tests", "..\GentlemanParserDiscordBot.Tests\GentlemanParserDiscordBot.Tests.csproj", "{463E8800-9BF7-4D77-9CD3-18F106742052}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{3FD1E2BA-A401-4BA4-B372-B7D43E953748}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FD1E2BA-A401-4BA4-B372-B7D43E953748}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FD1E2BA-A401-4BA4-B372-B7D43E953748}.Release|Any CPU.Build.0 = Release|Any CPU
-		{609B5BAF-8E4D-4D73-8631-7DB68898D1D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{609B5BAF-8E4D-4D73-8631-7DB68898D1D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{609B5BAF-8E4D-4D73-8631-7DB68898D1D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{609B5BAF-8E4D-4D73-8631-7DB68898D1D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{463E8800-9BF7-4D77-9CD3-18F106742052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{463E8800-9BF7-4D77-9CD3-18F106742052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{463E8800-9BF7-4D77-9CD3-18F106742052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{463E8800-9BF7-4D77-9CD3-18F106742052}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

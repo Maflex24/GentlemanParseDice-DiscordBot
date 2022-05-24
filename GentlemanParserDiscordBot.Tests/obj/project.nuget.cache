@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "65g9T9ZlPk0neiCxn6ogXbQkRY7gS3SR1eCI5YPaQctk3bt5Qe3oyIKZhLRy53naH8roBvJN/2i3uPPhi+W6UA==",
+  "dgSpecHash": "Rn0q8Tx+jf2YVUEN5uoViwGiEF2RX7kvDnYMf856IZ3Z0Bg4Gwq1eq1v90ZkJ26KDKXbtei4NzVUUdhywr0SFg==",
   "success": true,
-  "projectFilePath": "D:\\DEVs\\Projects\\GentlemanParserDiscordBot.Tests\\GentlemanParserDiscordBot.Tests.csproj",
+  "projectFilePath": "D:\\DEVs\\Projects\\GentlemanDiceParserDiscordBot\\GentlemanParserDiscordBot.Tests\\GentlemanParserDiscordBot.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Gabriel\\.nuget\\packages\\coverlet.collector\\3.1.0\\coverlet.collector.3.1.0.nupkg.sha512",
     "C:\\Users\\Gabriel\\.nuget\\packages\\discord.net\\3.6.1\\discord.net.3.6.1.nupkg.sha512",
