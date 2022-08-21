@@ -1,6 +1,0 @@
-D:\DEVs\Published\GentelmanParserDiscordBot.pdb
-D:\DEVs\Published\clrcompression.dll
-D:\DEVs\Published\clrjit.dll
-D:\DEVs\Published\coreclr.dll
-D:\DEVs\Published\mscordaccore.dll
-D:\DEVs\Published\GentelmanParserDiscordBot.exe

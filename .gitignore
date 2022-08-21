@@ -1,0 +1,8 @@
+token.txt
+bin/*
+.vs/*
+obj/*
+images/
+multicommands.json
+path.txt
+DevelopmentToken.txt
