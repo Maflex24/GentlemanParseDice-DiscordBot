@@ -1,28 +1,104 @@
-# GentlemanParseDice-DiscordBot
 
-## Features
-### Dice Parser
-Syntax looks like:
-`![howmanyrolls]d[whatdice]+bonus-penalty`
+# Gentleman Parser
 
-So for example:
-`!5d6+4` rolls for you 5 times dice 6 and finally add +4 of bonus. 
-Against `d` you can use `k` if you prefer.
-If you not write any number before 'd' or 'k' it rolls one time. So example corrects syntax are: `1d4`, `2d10-2`, `5k6`, `30k16`. Don't try rolls more than 30 times in one command, Gentleman don't like it.
+Gentleman Dice Parser is a discord bot to roll virtual dice(s), sum your roll, and optional bonuses, show result, and statistics of your roll. 
 
-You have information about every roll, average and percent of maximum possibile roll. If you for example roll `!5d6+4` for damage and you get together 17, you will get information that's 43% of possible power. So.. I'm sorry for you ;)    
-![Roll image](https://github.com/Maflex24/GentlemanParseDice-DiscordBot/blob/main/GentlemanParseDice-DiscordBot/5d6plus4.png?raw=true)  
-Like you see on image bot also tag you, so no longer problem if two people rolls at the same time, and you don't know which rolls is for who.   
+Antoher functionality is replying for custom command with random reply, avalaible to this command. More details about it below. 
 
-### Custom replies
-Some files are not included in github, like bot token.txt, path.txt, and multicommands.json. Token is my private key to bot, path.txt keep path to multicommands.json file, where I keep custom commands. It looks like: 
+
+## Roll command
+
+### Syntax
+
+Syntax for rolling is simple: `!5d10-2+5`, where:  
+- `!` is command prefix. You can change this prefix to other char, at `Classses/DevelopmentInfo.cs`
+
+```c#
+public static char CommandPrefix { get; } = '!';
+```
+
+- `5` is how many rolls you want to do. Here is 5 rolls. You can skip this parameter, then you will roll one time
+Bot has limit to roll maximum 30 times in one command, for performance security reason
+- `d` or `k` is separator, you need to use one of them to run command correctly
+- `10` is your dice maximum value, it's not fixed-defined, you can use some strange value, like `3` or `1000` if you want
+- `-2` and `+5` are's yours penalties and bonuses. It's summming together, so at this case is `+3`. If your character has some bonuses, and penalties, you don't need to calculate it, bot will do it for you
+
+### Replies
+
+General reply looks like:
+
+```
+@YourDiscordNick : TotalRollSum
+command | [all single roll values] | [totalBonus]
+Average: average value
+Power: % of max possibile to roll value
+```
+
+Example reply for command `5d6+4`:
+
+```
+@YourDiscordNick: 24
+5d6+4 | [3, 6, 5, 1, 5] [4]
+Average: 4
+Power: 66%
+```
+
+And few more examples directly from Discord:
+
+![Roll examples](rollExamples.png?raw=true)  
+
+As you can see, there is not information about `average`, and `power`, when roll is simple enough
+
+
+
+## Custom Replies
+
+You can edit `multicommands.json` file, to add your commands, and possible replies for them
+
+For exampe:
+
 ```json
 {
-    "hello": [
-        "Hello, How are you?",
-        "Nah, I'm not in mood today. Hope you are better!",
-        "Roll me!"
-    ]
+  "hello": [
+    "Hey you! How are you?",
+    "Wanna diceing today?",
+    "If I'm slow today, sorry, I was diceing all night"
+  ],
+  "mycommand" : [
+      "My first reply",
+      "My second reply"
+  ]
 }
 ```
-So, at this structure by type `!hello` you will get one of the possible answers. 
+
+Then by typing `!mycommand` you will get one of your defined reply (random).
+- Be careful of valid .json format, it's easy to make mistake with some unexpected character. You can use tools like [JSON Formatter & Validator](https://jsonformatter.curiousconcept.com/) to check is your file correct
+- Bot read file on start, if you edit file when bot works, changes will be avalaible after restart
+
+### Image replies
+
+You can add image to `images` directory, like `images/myimage.png`, and use image as reply. Add in `multicommands.json` image name with extension:
+
+```json
+```json
+{
+  "hello": [
+    "Hey you! How are you?",
+    "Wanna diceing today?",
+    "If I'm slow today, sorry, I was diceing all night"
+  ],
+  "mycommand" : [
+      "My first reply",
+      "My second reply",
+      "myimage.png"
+  ]
+}
+```
+
+Program will send that image as reply, if this answer will be rolled. Your file need to be in `image` directory, and need to be in one of this format:
+- .jpg
+- .jpeg
+- .gif
+- .png 
+
+Don't use too big image. It can slow down reply time too much.

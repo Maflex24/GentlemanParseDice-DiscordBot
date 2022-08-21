@@ -11,10 +11,7 @@ namespace GentlemanParserDiscordBot
         private static bool inDevelopment { get; set; } = false;
         private static string commandFileName = "multicommands.json";
 
-        public static char CommandPrefix
-        {
-            get;
-        } = '!';
+        public static char CommandPrefix { get; } = '!';
 
         public static string GetCommandListPath() => inDevelopment ? $"../../../{commandFileName}" : commandFileName;
         public static string GetImagesPath() => inDevelopment ? $"../../../images/" : "images/";
