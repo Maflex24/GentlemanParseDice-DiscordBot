@@ -12,7 +12,7 @@ namespace GentlemanParserDiscordBot
     {
         public static string RollOutput(string command)
         {
-            RollData rollData = GetRollBasicsInformation(command);
+            var rollData = GetRollBasicsInformation(command);
 
             if (rollData == null)
                 return "Use wise numbers please";
@@ -28,7 +28,7 @@ namespace GentlemanParserDiscordBot
 
         private static string OutputFormatter(RollData rollData)
         {
-            StringBuilder output = new StringBuilder();
+            var output = new StringBuilder();
 
             output.Append($"**{rollData.Sum}**");
             output.Append("\n```\n");
@@ -58,7 +58,7 @@ namespace GentlemanParserDiscordBot
             return output.ToString();
         }
 
-        public static void GetRollDetails(ref RollData rollData) // average, percent
+        public static void GetRollDetails(ref RollData rollData)
         {
             rollData.Average = Math.Round(rollData.Rolls.Average(), 2);
             rollData.PercentOfMaximumResult = (decimal)rollData.Rolls.Sum() / ((decimal)rollData.DiceType * (decimal)rollData.HowManyRolls) * (decimal)100;
@@ -67,9 +67,9 @@ namespace GentlemanParserDiscordBot
 
         public static void Roll(ref RollData rollData)
         {
-            Random dice = new Random();
+            var dice = new Random();
 
-            for (int i = 0; i < rollData.HowManyRolls; i++)
+            for (var i = 0; i < rollData.HowManyRolls; i++)
             {
                 rollData.Rolls.Add(dice.Next(1, rollData.DiceType + 1));
             }
@@ -79,29 +79,29 @@ namespace GentlemanParserDiscordBot
 
         public static RollData GetRollBasicsInformation(string command)
         {
-            RollData rollData = new RollData();
-            string isDigid = @"\d";
-            string isDigidOrMinusDigid = @"\d+|-\d+";
+            var rollData = new RollData();
+            var digitPattern = @"\d";
+            var digitOrNegativePattern = @"\d+|-\d+";
 
             // Rolls Qty
             try
             {
-                var rollsQtyValues = command.TakeWhile(c => Regex.IsMatch(c.ToString(), isDigid)).ToArray();
+                var rollsQtyValues = command.TakeWhile(c => Regex.IsMatch(c.ToString(), digitPattern)).ToArray();
                 rollData.HowManyRolls = rollsQtyValues.Length < 1 ? 1 : int.Parse(rollsQtyValues);
 
                 // DiceType
                 var dkIndex = command.IndexOfAny(new char[] { 'd', 'k' });
-                var diceTypeValues = command.Substring(dkIndex + 1).TakeWhile(c => Regex.IsMatch(c.ToString(), isDigid)).ToArray();
+                var diceTypeValues = command.Substring(dkIndex + 1).TakeWhile(c => Regex.IsMatch(c.ToString(), digitPattern)).ToArray();
                 rollData.DiceType = int.Parse(diceTypeValues);
 
                 // Bonuses
-                int bonusesStatedIndex = command.IndexOfAny(new char[] { '+', '-' });
+                var bonusesStatedIndex = command.IndexOfAny(new char[] { '+', '-' });
 
                 if (bonusesStatedIndex < 0)
                     rollData.Bonuses = 0;
                 else
                 {
-                    var bonusValues = Regex.Matches(command.Substring(bonusesStatedIndex), isDigidOrMinusDigid);
+                    var bonusValues = Regex.Matches(command.Substring(bonusesStatedIndex), digitOrNegativePattern);
 
                     foreach (Match element in bonusValues)
                     {

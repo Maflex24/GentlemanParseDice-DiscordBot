@@ -8,7 +8,7 @@ namespace GentlemanParserDiscordBot
 {
     public static class DevelopmentInfo
     {
-        private static bool isInDevelopment { get; set; } = false;
+        private static bool inDevelopment { get; set; } = false;
         private static string commandFileName = "multicommands.json";
 
         public static char CommandPrefix
@@ -16,8 +16,8 @@ namespace GentlemanParserDiscordBot
             get;
         } = '!';
 
-        public static string GetCommandListPath() => isInDevelopment ? $"../../../{commandFileName}" : commandFileName;
-        public static string GetImagesPath() => isInDevelopment ? $"../../../images/" : "images/";
-        public static void SetInDevelopmentStatus() => isInDevelopment = true;
+        public static string GetCommandListPath() => inDevelopment ? $"../../../{commandFileName}" : commandFileName;
+        public static string GetImagesPath() => inDevelopment ? $"../../../images/" : "images/";
+        public static void SetInDevelopmentStatus() => inDevelopment = true;
     }
 }

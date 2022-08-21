@@ -17,7 +17,8 @@ namespace GentlemanParserDiscordBot
         public async Task MainAsync()
         {
             _client = new DiscordSocketClient();
-            _client.MessageReceived += CommandHandler.Handler;
+            CommandHandler commandHandler = new CommandHandler(new DataHandler());
+            _client.MessageReceived += commandHandler.Handler;
             _client.Log += Log;
 
             var tokenHandler = new TokenHandler();
