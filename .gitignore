@@ -2,8 +2,12 @@ token.txt
 bin/*
 .vs/*
 obj/*
-
-
+GentlemanParseDice-DiscordBot/bin/*
+GentlemanParseDice-DiscordBot/obj/*
+GentlemanParseDice-DiscordBot/.vs/*
+GentlemanParseDice-DiscordBot/images/*
+GentlemanParserDiscordBot.Tests/bin/*
+GentlemanParserDiscordBot.Tests/obj/*
 
 path.txt
 DevelopmentToken.txt
