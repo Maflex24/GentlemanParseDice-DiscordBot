@@ -1,15 +1,14 @@
-﻿using System;
+﻿using Discord.WebSocket;
+using GentelmanParserDiscordBot.Commands;
+using GentelmanParserDiscordBot.Dice;
+using GentlemanParserDiscordBot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Discord;
-using Discord.WebSocket;
-using GentelmanParserDiscordBot;
-using GentelmanParserDiscordBot.Classes;
 
-namespace GentlemanParserDiscordBot
+namespace GentelmanParserDiscordBot.Handlers
 {
     public class CommandHandler
     {
@@ -58,7 +57,7 @@ namespace GentlemanParserDiscordBot
 
             foreach (var imageExtension in imageExtensions)
             {
-                if (!Regex.IsMatch(commandsAndOutputMessages[commandContext][index], imageExtension)) 
+                if (!Regex.IsMatch(commandsAndOutputMessages[commandContext][index], imageExtension))
                     continue;
 
                 isImageType = true;

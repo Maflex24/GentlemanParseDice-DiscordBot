@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace GentlemanParserDiscordBot
+namespace GentelmanParserDiscordBot.Dice
 {
     public class RollData
     {
@@ -15,6 +11,5 @@ namespace GentlemanParserDiscordBot
         public int Sum { get; set; }
         public decimal PercentOfMaximumResult { get; set; }
         public double Average { get; set; }
-
     }
 }

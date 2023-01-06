@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Discord.WebSocket;
 using GentlemanParserDiscordBot;
+using System.IO;
 
-namespace GentelmanParserDiscordBot.Classes
+namespace GentelmanParserDiscordBot.Commands
 {
     public class ImageCommand : ICommand
     {
