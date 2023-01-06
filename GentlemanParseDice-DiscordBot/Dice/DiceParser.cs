@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace GentlemanParserDiscordBot
+namespace GentelmanParserDiscordBot.Dice
 {
     public class DiceParser
     {
@@ -42,7 +39,7 @@ namespace GentlemanParserDiscordBot
             }
 
             output.Append(" | ");
-            output.Append($"[{String.Join(", ", rollData.Rolls)}]");
+            output.Append($"[{string.Join(", ", rollData.Rolls)}]");
 
             if (rollData.Bonuses != 0)
                 output.Append($" [{rollData.Bonuses}]");
@@ -61,7 +58,7 @@ namespace GentlemanParserDiscordBot
         public static void GetRollDetails(ref RollData rollData)
         {
             rollData.Average = Math.Round(rollData.Rolls.Average(), 2);
-            rollData.PercentOfMaximumResult = (decimal)rollData.Rolls.Sum() / ((decimal)rollData.DiceType * (decimal)rollData.HowManyRolls) * (decimal)100;
+            rollData.PercentOfMaximumResult = rollData.Rolls.Sum() / (rollData.DiceType * (decimal)rollData.HowManyRolls) * 100;
             rollData.PercentOfMaximumResult = Math.Floor(rollData.PercentOfMaximumResult);
         }
 
@@ -109,7 +106,7 @@ namespace GentlemanParserDiscordBot
                     }
                 }
             }
-            catch (Exception notCorrectNumber)
+            catch
             {
                 Console.WriteLine("Too big number for int type");
                 return null;
@@ -118,8 +115,6 @@ namespace GentlemanParserDiscordBot
             return rollData;
         }
 
-
         public static bool IsADiceRoll(string command) => Regex.IsMatch(command, @"^[1-9]\d*[d|k][1-9]\d*[-|+|\d]*|^d[1-9]*\d*[-|+|\d]*|^k[1-9]*\d*[-|+|\d]*");
-
     }
 }

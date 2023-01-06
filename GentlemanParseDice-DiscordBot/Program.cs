@@ -1,10 +1,9 @@
 ﻿using Discord;
 using Discord.WebSocket;
+using GentelmanParserDiscordBot.Handlers;
+using GentelmanParserDiscordBot.Settings;
 using System;
-using System.IO;
 using System.Threading.Tasks;
-using GentelmanParserDiscordBot;
-using GentlemanParserDiscordBot;
 
 namespace GentlemanParserDiscordBot
 {
@@ -14,6 +13,7 @@ namespace GentlemanParserDiscordBot
             => new Program().MainAsync().GetAwaiter().GetResult();
 
         private DiscordSocketClient _client;
+
         public async Task MainAsync()
         {
             _client = new DiscordSocketClient();
