@@ -1,6 +1,7 @@
 ﻿using Discord.WebSocket;
 using GentelmanParserDiscordBot.Commands;
 using GentelmanParserDiscordBot.Dice;
+using GentelmanParserDiscordBot.Logger;
 using GentlemanParserDiscordBot;
 using System;
 using System.Collections.Generic;
