@@ -4,6 +4,7 @@ using GentelmanParserDiscordBot.Dice;
 using GentlemanParserDiscordBot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace GentelmanParserDiscordBot.Handlers
 
         private static readonly Dictionary<string, List<string>> commandsAndOutputMessages = DataHandler.GetCommandsList();
 
-        private static bool CommandExist(string commandContent) => commandsAndOutputMessages.Keys.Contains(commandContent) ? true : false;
+        private static bool CommandExist(string commandContent) => commandsAndOutputMessages.Keys.Contains(commandContent);
 
         public Task Handler(SocketMessage message)
         {
