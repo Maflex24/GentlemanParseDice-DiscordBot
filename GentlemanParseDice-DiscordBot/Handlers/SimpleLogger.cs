@@ -34,7 +34,7 @@ namespace GentelmanParserDiscordBot.Handlers
             builder.Append(separator);
 
             string rolledOrCommandInfo;
-            var rolledOrCommandInfoPadLength = 100;
+            var rolledOrCommandInfoPadLength = 140;
 
             if (logtype is LogType.Roll)
                 rolledOrCommandInfo = $"For {log.Command} rolled: {log.RollData.Sum}";
