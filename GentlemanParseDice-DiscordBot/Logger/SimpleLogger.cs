@@ -1,22 +1,11 @@
-﻿using GentelmanParserDiscordBot.Dice;
-using GentlemanParserDiscordBot;
+﻿using GentlemanParserDiscordBot;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace GentelmanParserDiscordBot.Handlers
+namespace GentelmanParserDiscordBot.Logger
 {
-    public enum LogType
-    {
-        Failed,
-        Roll,
-        Command
-    }
-
     public static class SimpleLogger
     {
         public static void Log(LogType logtype, ref Log log, ref Stopwatch stopwatch)
@@ -66,16 +55,5 @@ namespace GentelmanParserDiscordBot.Handlers
 
             Console.WriteLine(builder.ToString());
         }
-    }
-
-    public class Log
-    {
-        public LogType Type { get; set; }
-        public string Author { get; set; }
-        public string Message { get; set; }
-        public string Command { get; set; }
-        public RollData? RollData { get; set; }
-        public string? Reply { get; set; }
-        public long ElapsedMiliseconds { get; set; }
     }
 }

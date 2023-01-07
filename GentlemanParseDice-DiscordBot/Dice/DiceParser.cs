@@ -1,4 +1,4 @@
-﻿using GentelmanParserDiscordBot.Handlers;
+﻿using GentelmanParserDiscordBot.Logger;
 using System;
 using System.Linq;
 using System.Text;
