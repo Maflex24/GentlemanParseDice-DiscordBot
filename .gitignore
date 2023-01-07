@@ -5,6 +5,7 @@ obj/*
 GentlemanParseDice-DiscordBot/bin/*
 GentlemanParseDice-DiscordBot/obj/*
 GentlemanParseDice-DiscordBot/.vs/*
+GentlemanParseDice-DiscordBot/logs.txt
 GentlemanParseDice-DiscordBot/images/*
 GentlemanParserDiscordBot.Tests/bin/*
 GentlemanParserDiscordBot.Tests/obj/*
