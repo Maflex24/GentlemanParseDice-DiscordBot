@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GentelmanParserDiscordBot.Handlers;
+using System;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -7,7 +8,7 @@ namespace GentelmanParserDiscordBot.Dice
 {
     public class DiceParser
     {
-        public static string RollOutput(string command)
+        public static string RollOutput(string command, ref Log log)
         {
             var rollData = GetRollBasicsInformation(command);
 
@@ -19,6 +20,8 @@ namespace GentelmanParserDiscordBot.Dice
 
             Roll(ref rollData);
             GetRollDetails(ref rollData);
+
+            log.RollData = rollData;
 
             return OutputFormatter(rollData);
         }

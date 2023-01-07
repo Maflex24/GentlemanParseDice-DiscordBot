@@ -26,15 +26,26 @@ namespace GentelmanParserDiscordBot.Handlers
 
         public Task Handler(SocketMessage message)
         {
+            var stopwatch = Stopwatch.StartNew();
+
+            var log = new Log();
+            log.Author = message.Author.Username;
+
             if (!message.Content.StartsWith(DevelopmentInfo.CommandPrefix) || message.Author.IsBot)
                 return Task.CompletedTask;
 
             var commandLength = message.Content.Contains(' ') ? message.Content.IndexOf(' ') : message.Content.Length;
             var commandContext = message.Content.Substring(1, commandLength - 1).ToLower();
+            log.Command = commandContext;
 
             if (DiceParser.IsADiceRoll(commandContext))
             {
-                message.Channel.SendMessageAsync(message.Author.Mention + ": " + DiceParser.RollOutput(commandContext));
+                var rollOutput = DiceParser.RollOutput(commandContext, ref log);
+
+                message.Channel.SendMessageAsync(message.Author.Mention + ": " + rollOutput);
+
+                stopwatch.Stop();
+                SimpleLogger.Log(LogType.Roll, ref log, ref stopwatch);
                 return Task.CompletedTask;
             }
 
@@ -47,7 +58,11 @@ namespace GentelmanParserDiscordBot.Handlers
             var indexOfOutputMessage = rollOutputIndex(commandContext);
             var command = getNewCommand(commandContext, indexOfOutputMessage, message);
 
-            command.ExecuteCommand(message);
+            log.Reply = command.ExecuteCommand(message);
+
+            stopwatch.Stop();
+            SimpleLogger.Log(LogType.Command, ref log, ref stopwatch);
+
             return Task.CompletedTask;
         }
 

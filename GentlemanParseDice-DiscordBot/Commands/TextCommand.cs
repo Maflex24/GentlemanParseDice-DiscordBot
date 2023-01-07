@@ -15,9 +15,11 @@ namespace GentelmanParserDiscordBot.Commands
             CommandContent = commandContent;
         }
 
-        public void ExecuteCommand(SocketMessage message)
+        public string ExecuteCommand(SocketMessage message)
         {
             message.Channel.SendMessageAsync(_reply);
+
+            return _reply;
         }
     }
 }
