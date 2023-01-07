@@ -6,6 +6,6 @@ namespace GentelmanParserDiscordBot.Commands
     {
         public string CommandContent { get; set; }
 
-        public void ExecuteCommand(SocketMessage message);
+        public string ExecuteCommand(SocketMessage message);
     }
 }

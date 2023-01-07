@@ -18,10 +18,12 @@ namespace GentelmanParserDiscordBot.Commands
             CommandContent = commandContent;
         }
 
-        public void ExecuteCommand(SocketMessage message)
+        public string ExecuteCommand(SocketMessage message)
         {
             message.Channel.SendFileAsync(
                 new FileAttachment(Path.Combine(DevelopmentInfo.GetImagesPath(), _reply)));
+
+            return _reply;
         }
     }
 }

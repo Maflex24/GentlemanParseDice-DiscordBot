@@ -15,11 +15,9 @@ namespace GentlemanParserDiscordBot
 
         public static Dictionary<string, List<string>> GetCommandsList()
         {
-            Dictionary<string, List<string>> outDictionary = new Dictionary<string, List<string>>();
-
             string fileContext = File.ReadAllText(commandListPath);
 
-            return outDictionary = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(fileContext);
+            return JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(fileContext);
         }
     }
 }
