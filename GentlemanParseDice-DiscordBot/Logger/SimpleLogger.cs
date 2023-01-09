@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace GentelmanParserDiscordBot.Logger
@@ -26,7 +27,16 @@ namespace GentelmanParserDiscordBot.Logger
             var rolledOrCommandInfoPadLength = 140;
 
             if (logtype is LogType.Roll)
-                rolledOrCommandInfo = $"For {log.Command} rolled: {log.RollData.Sum}";
+            {
+                var rolls = new StringBuilder();
+                foreach (var roll in log.RollData.Rolls)
+                {
+                    rolls.Append(roll + " ");
+                }
+
+                rolledOrCommandInfo = $"For {log.Command} rolled: {log.RollData.Sum} | {log.RollData.DiceType}: {rolls.ToString()}";
+                logRolls(log);
+            }
             else
             {
                 rolledOrCommandInfo = log.Command.PadRight(10) + separator;
@@ -54,6 +64,34 @@ namespace GentelmanParserDiscordBot.Logger
             File.AppendAllText(logFile, "\n" + builder.ToString());
 
             Console.WriteLine(builder.ToString());
+        }
+
+        private static void logRolls(Log log)
+        {
+            var outBuilder = new StringBuilder();
+            var separator = " | ";
+
+            foreach (var roll in log.RollData.Rolls)
+            {
+                StringBuilder insideBuilder = new StringBuilder();
+
+                insideBuilder.Append(DateTime.Now.ToString().PadRight(20));
+                insideBuilder.Append(separator);
+
+                insideBuilder.Append(log.Author.PadRight(15));
+                insideBuilder.Append(separator);
+
+                insideBuilder.Append($"d{log.RollData.DiceType}".PadRight(5));
+                insideBuilder.Append(separator);
+
+                insideBuilder.Append(roll);
+                insideBuilder.Append(separator + "\n");
+
+                outBuilder.Append(insideBuilder.ToString());
+            }
+
+            var logFile = DevelopmentInfo.GetRollsFilePath();
+            File.AppendAllText(logFile, outBuilder.ToString());
         }
     }
 }
