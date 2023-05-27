@@ -80,7 +80,7 @@ namespace GentelmanParserDiscordBot.Handlers
                     else if (actionData.Bonuses == 0)
                         bonusInfo = string.Empty;
                     else
-                        bonusInfo = $"[-{actionData.Bonuses}]";
+                        bonusInfo = $"[{actionData.Bonuses}]";
 
                     var output = $"**{resultType}**";
                     output += $"\n**Poziom trudności:** {difficultData.Rolls.Min()} - {difficultData.Rolls.Max()}";
