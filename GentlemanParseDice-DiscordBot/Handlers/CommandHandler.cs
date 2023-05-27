@@ -53,32 +53,49 @@ namespace GentelmanParserDiscordBot.Handlers
             // For "Omerta" game system. I tried to use actual code, not to change too much, try to do id fast
             if (commandContext.StartsWith("om"))
             {
-                var difficultData = new RollData(2, 10);
-                DiceParser.Roll(ref difficultData);
+                try
+                {
+                    var difficultData = new RollData(2, 10);
+                    DiceParser.Roll(ref difficultData);
 
-                var omertaActionCommand = "1d6";
-                omertaActionCommand += commandContext.Substring(2);
-                var actionData = DiceParser.GetRollBasicsInformation(omertaActionCommand);
+                    var omertaActionCommand = "1d6";
+                    omertaActionCommand += commandContext.Substring(2);
+                    var actionData = DiceParser.GetRollBasicsInformation(omertaActionCommand);
 
-                DiceParser.Roll(ref actionData);
+                    DiceParser.Roll(ref actionData);
 
-                var resultType = string.Empty;
+                    var resultType = string.Empty;
 
-                if (actionData.Sum > difficultData.Rolls.Max())
-                    resultType = "Sukces";
-                else if (actionData.Sum < difficultData.Rolls.Min())
-                    resultType = "Porażka";
-                else
-                    resultType = "Częściowy sukces";
+                    if (actionData.Sum > difficultData.Rolls.Max())
+                        resultType = "Sukces";
+                    else if (actionData.Sum < difficultData.Rolls.Min())
+                        resultType = "Porażka";
+                    else
+                        resultType = "Częściowy sukces";
 
-                var output = resultType;
-                output += $"\nPoziomy trudności: {difficultData.Rolls.Min()} - {difficultData.Rolls.Max()}";
-                output += $"\nWylosowałeś łącznie: {actionData.Sum} [{actionData.Rolls[0]}]";
+                    var bonusInfo = string.Empty;
 
-                message.Channel.SendMessageAsync(message.Author.Mention + ": " + output);
+                    if (actionData.Bonuses > 0)
+                        bonusInfo = $"[+{actionData.Bonuses}]";
+                    else if (actionData.Bonuses == 0)
+                        bonusInfo = string.Empty;
+                    else
+                        bonusInfo = $"[-{actionData.Bonuses}]";
 
-                stopwatch.Stop();
-                return Task.CompletedTask;
+                    var output = $"**{resultType}**";
+                    output += $"\n**Poziom trudności:** {difficultData.Rolls.Min()} - {difficultData.Rolls.Max()}";
+                    output += $"\n**Wylosowałeś łącznie:** {actionData.Sum} | [{actionData.Rolls[0]}] {bonusInfo}";
+                    //output += $"\n**Los:** {actionData.Rolls[0]} **Bonus/kara:** {actionData.Bonuses}";
+
+                    message.Channel.SendMessageAsync(message.Author.Mention + ": " + output);
+
+                    stopwatch.Stop();
+                    return Task.CompletedTask;
+                }
+                catch
+                {
+                    message.Channel.SendMessageAsync(message.Author.Mention + ": " + "Coś pochrzaniłeś");
+                }
             }
 
             if (!CommandExist(commandContext))
