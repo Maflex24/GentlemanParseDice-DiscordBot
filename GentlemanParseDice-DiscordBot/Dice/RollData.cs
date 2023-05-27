@@ -11,5 +11,15 @@ namespace GentelmanParserDiscordBot.Dice
         public int Sum { get; set; }
         public decimal PercentOfMaximumResult { get; set; }
         public double Average { get; set; }
+
+        public RollData()
+        {
+        }
+
+        public RollData(int howManyRolls, int diceType)
+        {
+            HowManyRolls = howManyRolls;
+            DiceType = diceType;
+        }
     }
 }

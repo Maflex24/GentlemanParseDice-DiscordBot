@@ -50,6 +50,37 @@ namespace GentelmanParserDiscordBot.Handlers
                 return Task.CompletedTask;
             }
 
+            // For "Omerta" game system. I tried to use actual code, not to change too much, try to do id fast
+            if (commandContext.StartsWith("om"))
+            {
+                var difficultData = new RollData(2, 10);
+                DiceParser.Roll(ref difficultData);
+
+                var omertaActionCommand = "1d6";
+                omertaActionCommand += commandContext.Substring(2);
+                var actionData = DiceParser.GetRollBasicsInformation(omertaActionCommand);
+
+                DiceParser.Roll(ref actionData);
+
+                var resultType = string.Empty;
+
+                if (actionData.Sum > difficultData.Rolls.Max())
+                    resultType = "Sukces";
+                else if (actionData.Sum < difficultData.Rolls.Min())
+                    resultType = "Porażka";
+                else
+                    resultType = "Częściowy sukces";
+
+                var output = resultType;
+                output += $"\nPoziomy trudności: {difficultData.Rolls.Min()} - {difficultData.Rolls.Max()}";
+                output += $"\nWylosowałeś łącznie: {actionData.Sum} [{actionData.Rolls[0]}]";
+
+                message.Channel.SendMessageAsync(message.Author.Mention + ": " + output);
+
+                stopwatch.Stop();
+                return Task.CompletedTask;
+            }
+
             if (!CommandExist(commandContext))
             {
                 message.Channel.SendMessageAsync(message.Author.Mention + " Your command is not valid, Dear");
