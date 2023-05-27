@@ -55,41 +55,49 @@ namespace GentelmanParserDiscordBot.Handlers
             {
                 try
                 {
-                    var difficultData = new RollData(2, 10);
-                    DiceParser.Roll(ref difficultData);
+                    var logDifficultRollData = new Log();
+                    var logActionRollData = new Log();
+                    logDifficultRollData.Author = message.Author.Username;
+                    logActionRollData.Author = message.Author.Username;
+
+                    var difficultRollData = new RollData(2, 10);
+                    DiceParser.Roll(ref difficultRollData);
 
                     var omertaActionCommand = "1d6";
                     omertaActionCommand += commandContext.Substring(2);
-                    var actionData = DiceParser.GetRollBasicsInformation(omertaActionCommand);
+                    var actionRollData = DiceParser.GetRollBasicsInformation(omertaActionCommand);
 
-                    DiceParser.Roll(ref actionData);
+                    DiceParser.Roll(ref actionRollData);
 
                     var resultType = string.Empty;
 
-                    if (actionData.Sum > difficultData.Rolls.Max())
+                    if (actionRollData.Sum > difficultRollData.Rolls.Max())
                         resultType = "Sukces";
-                    else if (actionData.Sum < difficultData.Rolls.Min())
+                    else if (actionRollData.Sum < difficultRollData.Rolls.Min())
                         resultType = "Porażka";
                     else
                         resultType = "Częściowy sukces";
 
                     var bonusInfo = string.Empty;
 
-                    if (actionData.Bonuses > 0)
-                        bonusInfo = $"[+{actionData.Bonuses}]";
-                    else if (actionData.Bonuses == 0)
+                    if (actionRollData.Bonuses > 0)
+                        bonusInfo = $"[+{actionRollData.Bonuses}]";
+                    else if (actionRollData.Bonuses == 0)
                         bonusInfo = string.Empty;
                     else
-                        bonusInfo = $"[{actionData.Bonuses}]";
+                        bonusInfo = $"[{actionRollData.Bonuses}]";
 
                     var output = $"**{resultType}**";
-                    output += $"\n**Poziom trudności:** {difficultData.Rolls.Min()} - {difficultData.Rolls.Max()}";
-                    output += $"\n**Wylosowałeś łącznie:** {actionData.Sum} | [{actionData.Rolls[0]}] {bonusInfo}";
-                    //output += $"\n**Los:** {actionData.Rolls[0]} **Bonus/kara:** {actionData.Bonuses}";
+                    output += $"\n**Poziom trudności:** {difficultRollData.Rolls.Min()} - {difficultRollData.Rolls.Max()}";
+                    output += $"\n**Wylosowałeś łącznie:** {actionRollData.Sum} | [{actionRollData.Rolls[0]}] {bonusInfo}";
 
                     message.Channel.SendMessageAsync(message.Author.Mention + ": " + output);
 
                     stopwatch.Stop();
+                    logDifficultRollData.RollData = difficultRollData;
+                    logActionRollData.RollData = actionRollData;
+                    SimpleLogger.Log(LogType.Roll, ref logDifficultRollData, ref stopwatch);
+                    SimpleLogger.Log(LogType.Roll, ref logActionRollData, ref stopwatch);
                     return Task.CompletedTask;
                 }
                 catch
